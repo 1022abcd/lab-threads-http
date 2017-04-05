@@ -35,18 +35,22 @@ public class MovieDownloader {
 
 		try {
 
-			URL url = new URL(urlString);
+			URL url = new URL(urlString);//Create new Url with empty string
 
+			//Open up the connection, request, and connect
 			urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setRequestMethod("GET");
 			urlConnection.connect();
 
+			//Receiving user's input
 			InputStream inputStream = urlConnection.getInputStream();
-			StringBuffer buffer = new StringBuffer();
+			StringBuffer buffer = new StringBuffer(); //create new Stringbuffer
 			if (inputStream == null) {
 				return null;
 			}
-			reader = new BufferedReader(new InputStreamReader(inputStream));
+			
+			//Using user's input to go over the list
+			reader = new BufferedReader(new InputStreamReader(inputStream)); 
 
 			String line = reader.readLine();
 			while (line != null) {
@@ -64,6 +68,7 @@ public class MovieDownloader {
 
 			movies = results.split("\n");
 		} 
+		//exception
 		catch (IOException e) {
 			return null;
 		} 
@@ -80,7 +85,7 @@ public class MovieDownloader {
 			}
 		}
 
-		return movies;
+		return movies; //return list of movie that were searched
 	}
 
 
